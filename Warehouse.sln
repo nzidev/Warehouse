@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse", "Warehouse\Warehouse.csproj", "{49F06A82-39DC-4AA1-8650-CDDEA13C106E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseBL", "WarehouseBL\WarehouseBL.csproj", "{6370BA30-43D0-4085-8B7E-190E9ABD567F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49F06A82-39DC-4AA1-8650-CDDEA13C106E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49F06A82-39DC-4AA1-8650-CDDEA13C106E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49F06A82-39DC-4AA1-8650-CDDEA13C106E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49F06A82-39DC-4AA1-8650-CDDEA13C106E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6370BA30-43D0-4085-8B7E-190E9ABD567F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6370BA30-43D0-4085-8B7E-190E9ABD567F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6370BA30-43D0-4085-8B7E-190E9ABD567F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6370BA30-43D0-4085-8B7E-190E9ABD567F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {972DA85A-9ABF-4FA9-B49E-2B36D3C99B06}
+	EndGlobalSection
+EndGlobal

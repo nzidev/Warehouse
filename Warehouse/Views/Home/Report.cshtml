@@ -1,0 +1,73 @@
+﻿@using WarehouseBL.Models.DataBase;
+@model WarehouseBL.Models.View.ViewModel
+@{
+    ViewData["Title"] = "Отчет";
+
+    var operat = Model.operations.Where(x => (x.NewStatus.ToString() == Model.Status && Model.Status != "All") || (x.NewStatus.ToString() != Model.Status && Model.Status == "All")).GroupBy(x => x.ProductId);
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+
+    <table class="table">
+        <div class="row">
+
+            @using (Html.BeginForm("Report", "Home", FormMethod.Post))
+            {
+                <div>
+                    @Html.DropDownList("DropDownStatus", new SelectList(Enum.GetValues(typeof(Product.ProductStatus)), "All"),
+                              new { @class = "form-control" })
+                    <input type="submit" id="button" value="Добавить" hidden />
+
+                </div>
+
+                <div>
+                    <span>Start</span> <input type="date" name="start" />
+                </div>
+                <div>
+                    <span>End</span> <input type="date" name="end" />
+                </div>
+                <div>
+                    <input type="submit" value="Применить" />
+                </div>
+            }
+        </div>
+        <thead>
+            <tr>
+                <th>
+                   Статус
+                </th>
+                <th>fds</th>
+                <th>Дата</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entity in operat)
+                
+                {
+                    var entityList = entity.ToList();
+                    
+                    <tr>
+                        <td>@entityList[entityList.Count()-1].NewStatus</td>
+                        <td>@entityList[entityList.Count()-1].ProductName</td>
+
+
+                        <td>@TimeZoneInfo.ConvertTimeFromUtc(entityList[entityList.Count()-1].DateTime, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id))</td>
+                    </tr>
+                    
+                }
+        </tbody>
+    </table>
+    <div>
+        <h5>Всего: @operat.Count()</h5>
+    </div>
+
+    
+
+</div>
+
+<script>
+    function Changefunc() {
+       window.document.getElementById('button').click();
+    }
+</script>

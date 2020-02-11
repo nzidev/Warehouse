@@ -1,0 +1,97 @@
+﻿@using WarehouseBL.Models.DataBase;
+@model WarehouseBL.Models.View.ViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+    <div>
+        <div class="row">
+            <div class="col-12">
+                <h4>Принят</h4>
+                <table class="table table-bordered">
+
+                    <tr>
+                        @using (Html.BeginForm("ProductAdd", "Home", FormMethod.Post))
+                        {
+                            <td>@Html.TextBox("Name", "", new { @class = "form-control", placeholder = "Название" })</td>
+                            <td>@Html.TextBox("Price", "", new { @class = "form-control", placeholder = "Цена" })</td>
+                            <td>@Html.TextBox("Description", "", new { @class = "form-control", placeholder = "Описание" })</td>
+                            <td>@Html.DropDownList("DropDownStaff", new SelectList(Model.staffs, "StaffId", "Surname"), " ", new { @class = "form-control" })</td>
+                            <td><input type="submit" value="Добавить" class="btn btn-primary" /></td>
+                        }
+                        </tr>
+                        @foreach (Product entity in Model.products.Where(x => x.Status == Product.ProductStatus.Accept))
+                        {
+                <tr>
+                    <td>@entity.Name</td>
+                    <td>@entity.Price</td>
+                    <td>@entity.Description</td>
+                    @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
+                    {
+
+                        @Html.Hidden("Status", Product.ProductStatus.Warehouse)
+                        @Html.Hidden("ProductId", entity.ProdictId)
+
+                        <td>@Html.DropDownList("DropDownStaff", new SelectList(Model.staffs, "StaffId", "Surname"),"", new { @class = "form-control" })</td>
+                        <td><input type="submit" value="На склад" class="btn btn-warning" /></td>
+                    }
+                </tr>
+
+                        }
+                    </table>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-6">
+                <h4>Склад</h4>
+                <table class="table table-bordered">
+                    @foreach (Product entity in Model.products.Where(x => x.Status == Product.ProductStatus.Warehouse))
+                    {
+                    <tr>
+                        <td>@entity.Name</td>
+                        <td>@entity.Price</td>
+                        <td>@entity.Description</td>
+                        @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
+                        {
+
+                            @Html.Hidden("Status", Product.ProductStatus.Sold)
+                            @Html.Hidden("ProductId", entity.ProdictId)
+                            <td>@Html.DropDownList("DropDownStaff", new SelectList(Model.staffs, "StaffId", "Surname"), "", new { @class = "form-control" })</td>
+                            <td><input type="submit" value="Продан" class="btn btn-success" /></td>
+                        }
+                    </tr>
+                    }
+                </table>
+            </div>
+                <div class="col-6">
+                    <h4>Продан</h4>
+                    <table class="table table-bordered">
+                        @foreach (Product entity in Model.products.Where(x => x.Status == Product.ProductStatus.Sold))
+                        {
+                            <tr>
+                                <td>@entity.Name</td>
+                                <td>@entity.Price</td>
+                                <td>@entity.Description</td>
+                                
+                            </tr>
+                        }
+                    </table>
+                </div>
+                
+            </div>
+            <div>
+                <h4>Сотрудники</h4>
+                <table class="table table-bordered">
+                    @foreach (Staff entity in Model.staffs)
+                    {
+                        <tr>
+                            <td>@entity.Surname</td>
+                            <td>@entity.Name</td>
+                            <td>@entity.Title</td>
+                        </tr>
+                    }
+                </table>
+             </div>
+     </div>
